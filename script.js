@@ -68,6 +68,14 @@ function run() {
     const openList = [];
     openList.push(start);
     let destinationFound = false;
+
+    /*while (!openList.empty && openList.length < cellCountX * cellCountY) {
+        let n;
+        do {
+            var temp = Infinity;
+            
+        }
+    }*/
 }
 
 class Node {
