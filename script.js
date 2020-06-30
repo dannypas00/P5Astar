@@ -5,6 +5,8 @@ const cellCountY = 8; //document.getElementById("gridSizeY").value;
 const canvasX = cellCountX * (cellSize + cellGap) + cellGap;
 const canvasY = cellCountY * (cellSize + cellGap) + cellGap;
 let  canvas;
+let start;
+let end;
 const map = new Array(cellCountX);
 for (var i = 0; i < cellCountX; i++) {
     map[i] = new Array(cellCountY);
@@ -17,10 +19,9 @@ function setup() {
             map[i][j] = new Node(i, j, true);
         }
     }
+    start = map[0][0];
+    end = map[cellCountX -1][cellCountY - 1];
 }
-
-let start = map[0][0];
-let end = map[cellCountX -1][cellCountY - 1];
 
 function draw() {
     background(500); 
@@ -92,12 +93,16 @@ class Node {
         this.y2 = this.y1 + cellSize;
         this.centerY = this.y1 + (cellSize / 2);
 
-        this.h = dist(this.centerX, this.centerY, end.centerX, end.centerY);
+        this.h = Infinity;
         this.f = Infinity;
         this.g = Infinity;
 
         this.parent;
         this.traversed = false;
+    }
+
+    calculate = function() {
+        dist(this.centerX, this.centerY, end.centerX, end.centerY);
     }
 
     getFill = function() {
